@@ -2,31 +2,13 @@
 #include <vector>
 
 template <typename T>
-struct Node{
-        T val;
-        Node<T>* left;
-        Node<T>* right;
-
-        Node(T val){
-            this->val = val;
-            left = nullptr;
-            right = nullptr;
-        }
-
-        ~Node(){
-            if (left) delete left;
-            if (right) delete right;
-        }
-};
-
-template <typename T>
-class Segtree{
+class seg_tree{
     private:
         std::vector<T> tree;
         int arrsize;
     
     public:
-        Segtree(std::vector<T> vals): tree(vals.size() * 4){
+        seg_tree(std::vector<T> vals): tree(vals.size() * 4){
             arrsize = vals.size();
 
             // build tree

@@ -13,11 +13,14 @@ int main(){
     assert(binary_search(test_arr, 2) == -1);
 
     // good tests
-    for (int idx = 0; idx < LOAD; ++idx){
-        test_arr.push_back(idx);
+    for (int addedVal = 0; addedVal < LOAD; ++addedVal){
+        test_arr.push_back(addedVal);
 
-        for (int search_idx = 0; search_idx <= idx; search_idx++){
-            assert(binary_search(test_arr, search_idx) == search_idx);
+        for (int searchedVal = 0; searchedVal <= addedVal; searchedVal++){
+            if (binary_search(test_arr, searchedVal) != searchedVal){
+                cout << "error: index of searchedVal " << searchedVal << " is " << binary_search(test_arr, searchedVal) << ", should be " << searchedVal << endl;
+            }
+            assert(binary_search(test_arr, searchedVal) == searchedVal);
         }
     }
 
@@ -32,14 +35,14 @@ int main(){
     test_arr.clear();
 
     // bad test: empty
-    assert(binary_search(test_arr, 2) == -1);
+    assert(bisect_left(test_arr, 2) == -1);
 
     // good tests
     for (int idx = 0; idx < LOAD; ++idx){
         test_arr.push_back(idx);
 
         for (int search_idx = 0; search_idx <= idx; search_idx++){
-            assert(binary_search(test_arr, search_idx) == search_idx);
+            assert(bisect_left(test_arr, search_idx) == search_idx);
         }
     }
     test_arr.clear();
@@ -64,14 +67,21 @@ int main(){
     test_arr.clear();
 
     // bad test: empty
-    assert(binary_search(test_arr, 2) == -1);
+    assert(bisect_right(test_arr, 2) == -1);
 
     // good tests
     for (int idx = 0; idx < LOAD; ++idx){
         test_arr.push_back(idx);
 
         for (int search_idx = 0; search_idx <= idx; search_idx++){
-            assert(binary_search(test_arr, search_idx) == search_idx);
+            int target = search_idx + 1;
+            if (bisect_right(test_arr, search_idx) != target){
+                cout << "bisect_right failed to find " << search_idx << ", in array. Given response: " << bisect_right(test_arr, search_idx) << ", expected " << target << endl;
+                cout << "array looks like: ";
+                for (auto val : test_arr) cout << val << " ";
+                cout << endl;
+            }
+            assert(bisect_right(test_arr, search_idx) == target);
         }
     }
     test_arr.clear();

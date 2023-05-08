@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
+using namespace std;
 
 template <typename T>
 int binary_search(std::vector<T> arr, T val, int lo = 0, int hi = -1){
@@ -15,9 +17,10 @@ int binary_search(std::vector<T> arr, T val, int lo = 0, int hi = -1){
 
     int mid;
     if (hi == -1) hi = arr.size() - 1;    // convert -1 to last index
+    if (lo > hi) return -1;
 
-    while (lo <= hi){
-        mid = (lo + hi) / 2;
+    while (lo < hi){
+        mid = lo + (hi - lo) / 2;
 
         if (arr[mid] == val) 
             return mid;
@@ -26,6 +29,9 @@ int binary_search(std::vector<T> arr, T val, int lo = 0, int hi = -1){
         else 
             hi = mid - 1;
     }
+
+    if (arr[lo] == val)
+        return lo;
 
     return -1;
 }
@@ -43,17 +49,21 @@ int bisect_left(std::vector<T> arr, T val, int lo = 0, int hi = -1){
     int mid;
 
     // edge cases
-    if (hi == -1) hi = arr.size();    // convert -1 to last index
+    if (hi == -1) hi = arr.size() - 1;    // convert -1 to last index
     if (lo > hi) return -1;
 
 
     while (lo < hi){
-        mid = (lo + hi) / 2;
+        mid = lo + (hi - lo) / 2;
         if (arr[mid] < val) 
             lo = mid + 1;
         else 
             hi = mid;
     }
+
+    // edge case: larger than all values in the array
+    if (arr[lo] < val)
+        return lo + 1;
 
     return lo;
 }
@@ -71,17 +81,21 @@ int bisect_right(std::vector<T> arr, T val, int lo = 0, int hi = -1){
     int mid;
 
     // edge cases
-    if (hi == -1) hi = arr.size();    // convert -1 to last index
+    if (hi == -1) hi = arr.size() - 1;    // convert -1 to last index
     if (lo > hi) return -1;
 
 
     while (lo < hi){
-        mid = (lo + hi) / 2;
+        mid = lo + (hi - lo) / 2;
         if (arr[mid] > val) 
             hi = mid;
         else 
             lo = mid + 1;
     }
+
+    // edge case: <= all values in the array
+    if (arr[lo] <= val)
+        return lo + 1;
 
     return lo;
 }

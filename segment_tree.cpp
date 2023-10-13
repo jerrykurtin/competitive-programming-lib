@@ -26,4 +26,12 @@ int main() {
         cout << "failed to catch range error" << endl;
         exit(-1);
     } catch (runtime_error e) {}
+
+    vector<int> arr2 = {11, 6, 1, 12};
+    seg_tree<int, bit_xor<int>> st2(arr2);
+    for (auto val : st2.getTree()) {
+        cout << val << ", ";
+    }
+    cout << endl;
+
 }

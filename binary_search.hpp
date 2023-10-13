@@ -5,7 +5,7 @@
 using namespace std;
 
 template <typename T>
-int binary_search(std::vector<T> arr, T val, int lo = 0, int hi = -1){
+int binary_search(std::vector<T>& arr, T val, int lo = 0, int hi = -1){
     /* Finds the index of val in a sorted arr
     Args:
     - arr: the array to search
@@ -37,7 +37,7 @@ int binary_search(std::vector<T> arr, T val, int lo = 0, int hi = -1){
 }
 
 template <typename T>
-int bisect_left(std::vector<T> arr, T val, int lo = 0, int hi = -1){
+int bisect_left(std::vector<T>& arr, T val, int lo = 0, int hi = -1){
     /* Finds the leftmost valid insertion index of val in a sorted array (emulates python's bisect function)
     Args:
     - arr: the array to search
@@ -69,7 +69,7 @@ int bisect_left(std::vector<T> arr, T val, int lo = 0, int hi = -1){
 }
 
 template <typename T>
-int bisect_right(std::vector<T> arr, T val, int lo = 0, int hi = -1){
+int bisect_right(std::vector<T>& arr, T val, int lo = 0, int hi = -1){
     /* Finds the rightmost valid insertion index of val in a sorted array (emulates python's bisect function)
     Args:
     - arr: the array to search

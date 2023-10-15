@@ -149,8 +149,6 @@ T power(T base, T exp, T mod) {
 */
 template <typename T>
 T modInverse(T a, T m) {
-    if (gcd(a, m) != 1)
-        throw runtime_error("modular inverse requires coprime numbers.")
     return power(a, m - 2, m);
 }
 
